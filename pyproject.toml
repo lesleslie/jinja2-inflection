@@ -1,0 +1,17 @@
+[tool.pdm]
+
+[project]
+name = "jinja2-inflection"
+version = "0.1.1"
+description = ""
+authors = [
+    { name = "lesleslie", email = "les@wedgwoodwebworks.com" },
+]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
