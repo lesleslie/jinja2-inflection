@@ -1,13 +1,21 @@
 [tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "isort>=5.12.0",
+    "ruff>=0.0.262",
+]
 
 [project]
 name = "jinja2-inflection"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = [
     { name = "lesleslie", email = "les@wedgwoodwebworks.com" },
 ]
-dependencies = []
+dependencies = [
+    "inflection>=0.5.1",
+    "jinja2>=3.1.2",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = { text = "BSD-3-Clause" }
@@ -15,3 +23,25 @@ license = { text = "BSD-3-Clause" }
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.isort]
+split-on-trailing-comma = true
+force-wrap-aliases = true
+force-single-line = true
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.isort]
+profile = "black"
+py_version = 311
+multiple-lines-output = 3
+
+[tool.black]
+target-version = ["py311"]
+
+
