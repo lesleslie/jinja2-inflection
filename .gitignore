@@ -1,5 +1,11 @@
-/__pypackages__/
-/.pdm-python
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+./.mypy_cache
+.pdm-python
 /.pdm.toml
 /build/
+/__pypackages__/
 /dist/
+/.mypy_cache/
+/.ruff_cache/
+/jinja2_inflection/test.py

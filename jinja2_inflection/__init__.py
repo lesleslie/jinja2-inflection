@@ -12,11 +12,12 @@ from inflection import transliterate
 from inflection import underscore
 
 from jinja2.ext import Extension
+from jinja2 import Environment
 
 
 class InflectionExtension(Extension):
-    def __init__(self, environment):
-        super(InflectionExtension, self).__init__(environment)
+    def __init__(self, environment: Environment) -> None:
+        super().__init__(environment)
         inflection_filters = dict(
             camelize=camelize,
             dasherize=dasherize,
