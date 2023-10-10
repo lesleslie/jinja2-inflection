@@ -1,7 +1,13 @@
+[tool.pdm.options]
+config = [
+    "python.use_venv",
+    "true",
+]
+
 [tool.pdm.dev-dependencies]
 dev = [
-    "crackerjack>=0.1.7",
-    "pre-commit>=3.2.2",
+    "crackerjack>=0.6.20",
+    "pre-commit>=3.4.0",
 ]
 
 [tool.ruff]
@@ -25,21 +31,52 @@ target-version = [
     "py311",
 ]
 
-[tool.mypy]
-strict = true
-pretty = true
+[tool.creosote]
+paths = [
+    "jinja2_inflection",
+]
+deps-file = "pyproject.toml"
+exclude-deps = [
+    "pdm-bump",
+    "autotyping",
+    "python-ulid",
+    "pre-commit",
+    "pytest",
+    "libsass",
+    "starlette-decorouter",
+]
 
 [tool.refurb]
 enable_all = true
 
-[tool.pytype]
-inputs = [
-    "package_name",
+[tool.bandit]
+target = [
+    "jinja2_inflection",
 ]
+skips = [
+    "B113",
+    "B403",
+    "B404",
+    "B603",
+]
+
+[tool.pyright]
+include = [
+    "jinja2_inflection",
+]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = false
+reportOptionalMemberAccess = false
+reportOptionalCall = false
+reportUnknownMemberType = false
+reportUnknownVariableType = false
+reportUnknownArgumentType = false
+reportPrivateUsage = "warning"
+pythonVersion = "3.11"
 
 [project]
 name = "jinja2-inflection"
-version = "0.1.4"
+version = "0.1.5"
 description = ""
 dependencies = [
     "inflection>=0.5.1",

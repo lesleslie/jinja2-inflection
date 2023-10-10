@@ -32,4 +32,4 @@ class InflectionExtension(Extension):
             transliterate=transliterate,
             underscore=underscore,
         )
-        environment.filters.update(inflection_filters)
+        environment.filters.update(inflection_filters)  # type: ignore
