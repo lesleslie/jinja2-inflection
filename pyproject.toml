@@ -6,13 +6,12 @@ config = [
 
 [tool.pdm.dev-dependencies]
 dev = [
-    "crackerjack>=0.6.20",
-    "pre-commit>=3.4.0",
+    "crackerjack>=0.7.4",
 ]
 
 [tool.ruff]
 line-length = 88
-target-version = "py311"
+target-version = "py312"
 fix = true
 show-fixes = true
 show-source = true
@@ -28,7 +27,7 @@ convention = "google"
 
 [tool.black]
 target-version = [
-    "py311",
+    "py312",
 ]
 
 [tool.creosote]
@@ -38,12 +37,9 @@ paths = [
 deps-file = "pyproject.toml"
 exclude-deps = [
     "pdm-bump",
-    "autotyping",
-    "python-ulid",
-    "pre-commit",
     "pytest",
-    "libsass",
-    "starlette-decorouter",
+    "pre-commit",
+    "autotyping",
 ]
 
 [tool.refurb]
@@ -54,8 +50,8 @@ target = [
     "jinja2_inflection",
 ]
 skips = [
-    "B113",
     "B403",
+    "B113",
     "B404",
     "B603",
 ]
@@ -72,20 +68,29 @@ reportUnknownMemberType = false
 reportUnknownVariableType = false
 reportUnknownArgumentType = false
 reportPrivateUsage = "warning"
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 
 [project]
 name = "jinja2-inflection"
-version = "0.1.5"
+version = "0.2.0"
 description = ""
 dependencies = [
     "inflection>=0.5.1",
     "jinja2>=3.1.2",
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 readme = "README.md"
 authors = [
     { name = "lesleslie", email = "les@wedgwoodwebworks.com" },
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+    "License :: OSI Approved :: BSD License",
+    "Development Status :: 4 - Beta",
 ]
 
 [project.license]
