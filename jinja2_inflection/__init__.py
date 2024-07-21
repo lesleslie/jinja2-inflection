@@ -1,18 +1,19 @@
-from inflection import camelize
-from inflection import dasherize
-from inflection import humanize
-from inflection import ordinal
-from inflection import ordinalize
-from inflection import parameterize
-from inflection import pluralize
-from inflection import singularize
-from inflection import tableize
-from inflection import titleize
-from inflection import transliterate
-from inflection import underscore
-
-from jinja2.ext import Extension
+from inflection import (
+    camelize,
+    dasherize,
+    humanize,
+    ordinal,
+    ordinalize,
+    parameterize,
+    pluralize,
+    singularize,
+    tableize,
+    titleize,
+    transliterate,
+    underscore,
+)
 from jinja2 import Environment
+from jinja2.ext import Extension
 
 
 class InflectionExtension(Extension):

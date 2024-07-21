@@ -1,13 +1,13 @@
 repos:
   - repo: https://github.com/pdm-project/pdm
-    rev: 2.9.3  # a PDM release exposing the hook
+    rev: 2.17.1  # a PDM release exposing the hook
     hooks:
       - id: pdm-lock-check
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
-        name: trailing-whitspace
+        name: trailing-whitespace
       - id: end-of-file-fixer
         name: end-of-file-fixer
       - id: check-yaml
@@ -16,16 +16,13 @@ repos:
         name: check-toml
       - id: check-added-large-files
         name: check-added-large-files
-  - repo: https://github.com/psf/black
-    rev: '23.9.1'
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.4
     hooks:
-      - id: black
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.292
-    hooks:
+      - id: ruff-format
       - id: ruff
   - repo: https://github.com/fredrikaverpil/creosote
-    rev: v3.0.0
+    rev: v3.0.2
     hooks:
       - id: creosote
   - repo: https://github.com/ikamensh/flynt/
@@ -33,43 +30,45 @@ repos:
     hooks:
       - id: flynt
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.3.0
     hooks:
       - id: codespell
         additional_dependencies:
           - tomli
-        args: [--ignore-words-list, "crate,uptodate"]
   - repo: local
     hooks:
       - id: autotyping
         name: autotyping
-        entry: python -m libcst.tool codemod autotyping.AutotypeCommand
+        entry: python -m autotyping
         args:
           - --aggressive
           - --only-without-imports
-          - --show-successes
-          - --include-generated
           - --guess-common-names
           - jinja2_inflection
         types_or: [ python, pyi ]
         language: python
         files: \.py$
         additional_dependencies:
-          - autotyping>=23.3.0
-          - libcst>=0.4.9
+          - autotyping>=24.3.0
+          - libcst>=1.1.0
   - repo: https://github.com/dosisod/refurb
-    rev: v1.21.0
+    rev: v2.0.0
     hooks:
       - id: refurb
   - repo: https://github.com/PyCQA/bandit
-    rev: '1.7.5'
+    rev: '1.7.9'
     hooks:
       - id: bandit
         args: ["-c", "pyproject.toml"]
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.331
+    rev: v1.1.372
     hooks:
       - id: pyright
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.4
+    hooks:
+      - id: ruff
+      - id: ruff-format
   #  - repo: https://github.com/pdoc3/pdoc
   #    rev: master
   #    hooks:
@@ -80,11 +79,3 @@ repos:
   #        require_serial: true
   #        types: [ python ]
   #        always_run: true
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.292
-    hooks:
-      - id: ruff
-  - repo: https://github.com/psf/black
-    rev: '23.9.1'
-    hooks:
-      - id: black
