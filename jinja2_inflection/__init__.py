@@ -22,7 +22,7 @@ class InflectionExtension(Extension):
         inflection_filters = dict(
             camelize=camelize,
             dasherize=dasherize,
-            humanize_inflection=humanize,
+            humanize=humanize,
             ordinal=ordinal,
             ordinalize=ordinalize,
             parameterize=parameterize,
@@ -33,4 +33,4 @@ class InflectionExtension(Extension):
             transliterate=transliterate,
             underscore=underscore,
         )
-        environment.filters.update(inflection_filters)  # type: ignore
+        environment.filters.update(inflection_filters)

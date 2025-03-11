@@ -1,14 +1,10 @@
-[tool.pdm.dev-dependencies]
-dev = [
-    "crackerjack>=0.8.10",
-]
-
 [tool.ruff]
 line-length = 88
-target-version = "py312"
+target-version = "py313"
 fix = true
 show-fixes = true
 output-format = "full"
+unsafe-fixes = true
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -38,7 +34,7 @@ no-lines-before = [
 ]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 11
+max-complexity = 12
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
@@ -54,11 +50,19 @@ paths = [
 ]
 deps-file = "pyproject.toml"
 exclude-deps = [
-    "pdm",
     "pdm-bump",
+    "google-crc32c",
+    "uv",
     "pre-commit",
+    "pdm",
     "autotyping",
+    "pytest-asyncio",
+    "pyfiglet",
+    "pyyaml",
+    "pytest-cov",
     "pytest",
+    "tomli-w",
+    "pytest-mock",
 ]
 
 [tool.refurb]
@@ -69,10 +73,16 @@ target = [
     "jinja2_inflection",
 ]
 skips = [
-    "B113",
+    "B311",
     "B403",
-    "B404",
+    "B101",
+    "B607",
+    "B602",
+    "B704",
+    "B113",
     "B603",
+    "B301",
+    "B404",
 ]
 
 [tool.pyright]
@@ -84,7 +94,7 @@ exclude = [
     "scratch",
 ]
 extraPaths = [
-    "__pypackages__/3.12/lib/",
+    ".venv/lib/python3.13/site-packages/",
 ]
 typeCheckingMode = "strict"
 reportMissingTypeStubs = false
@@ -93,8 +103,11 @@ reportOptionalCall = false
 reportUnknownMemberType = false
 reportUnknownVariableType = false
 reportUnknownArgumentType = false
+reportInvalidTypeForm = false
+reportUnknownLambdaType = false
+reportUnknownParameterType = "warning"
 reportPrivateUsage = "warning"
-pythonVersion = "3.12"
+pythonVersion = "3.13"
 pythonPlatform = "Darwin"
 
 [tool.codespell]
@@ -102,22 +115,35 @@ skip = "*/data/*"
 quiet-level = 3
 ignore-words-list = "crate,uptodate"
 
+[tool.pytest.ini_options]
+addopts = "--cov=jinja2_inflection"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.vulture]
+min_confidence = 86
+paths = [
+    "jinja2_inflection",
+]
+ignore_names = [
+    "cls",
+]
+
 [project]
 name = "jinja2-inflection"
-version = "0.2.1"
+version = "0.3.0"
 description = ""
 dependencies = [
     "inflection>=0.5.1",
-    "jinja2>=3.1.4",
+    "jinja2>=3.1.6",
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 readme = "README.md"
 authors = [
     { name = "lesleslie", email = "les@wedgwoodwebworks.com" },
 ]
 classifiers = [
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Operating System :: OS Independent",
     "Typing :: Typed",
@@ -133,3 +159,8 @@ requires = [
     "pdm-backend",
 ]
 build-backend = "pdm.backend"
+
+[dependency-groups]
+dev = [
+    "crackerjack>=0.13.0",
+]
