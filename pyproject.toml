@@ -30,11 +30,10 @@ extend-select = [
 [tool.ruff.lint.isort]
 no-lines-before = [
     "first-party",
-    "local-folder",
 ]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 12
+max-complexity = 13
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
@@ -50,19 +49,20 @@ paths = [
 ]
 deps-file = "pyproject.toml"
 exclude-deps = [
-    "pytest-cov",
-    "pre-commit",
-    "pdm-bump",
     "pyyaml",
-    "pytest-mock",
-    "pdm",
-    "pytest",
-    "tomli-w",
-    "google-crc32c",
-    "uv",
-    "pyfiglet",
-    "autotyping",
+    "pytest-cov",
     "pytest-asyncio",
+    "pre-commit",
+    "tomli-w",
+    "uv",
+    "pdm",
+    "pyfiglet",
+    "google-crc32c",
+    "pytest",
+    "autotyping",
+    "pytest-mock",
+    "pytest-timeout",
+    "pdm-bump",
 ]
 
 [tool.refurb]
@@ -73,15 +73,15 @@ target = [
     "jinja2_inflection",
 ]
 skips = [
-    "B602",
-    "B101",
-    "B404",
     "B704",
-    "B603",
-    "B311",
-    "B607",
     "B113",
     "B403",
+    "B404",
+    "B101",
+    "B602",
+    "B311",
+    "B603",
+    "B607",
     "B301",
 ]
 
@@ -113,11 +113,26 @@ pythonPlatform = "Darwin"
 [tool.codespell]
 skip = "*/data/*"
 quiet-level = 3
-ignore-words-list = "crate,uptodate"
+ignore-words-list = "crate,uptodate,nd"
 
 [tool.pytest.ini_options]
-addopts = "--cov=jinja2_inflection"
+addopts = "--cov=jinja2_inflection --cov-report=term"
 asyncio_default_fixture_loop_scope = "function"
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+asyncio_mode = "auto"
+testpaths = [
+    "tests",
+    "jinja2_inflection",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
+]
 
 [tool.vulture]
 min_confidence = 86
@@ -128,10 +143,42 @@ ignore_names = [
     "cls",
 ]
 
+[tool.coverage.run]
+branch = false
+source = [
+    "jinja2_inflection",
+]
+data_file = ".coverage"
+parallel = false
+omit = [
+    "*/tests/*",
+    "*/site-packages/*",
+    "*/__pycache__/*",
+    "*/__init__.py",
+    "*/_version.py",
+    "*/conftest.py",
+    "*/test_*.py",
+    "*/_test.py",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
+    "except ImportError",
+    "def __str__",
+    "@abstractmethod",
+]
+ignore_errors = false
+
 [project]
 name = "jinja2-inflection"
-version = "0.3.1"
-description = ""
+version = "0.4.0"
+description = "A Jinja2 extension that integrates the inflection library's string transformation functions as template filters"
 dependencies = [
     "inflection>=0.5.1",
     "jinja2>=3.1.6",
@@ -145,11 +192,17 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.13",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Text Processing :: Filters",
+    "Topic :: Software Development :: Libraries :: Python Modules",
     "Operating System :: OS Independent",
     "Typing :: Typed",
     "License :: OSI Approved :: BSD License",
     "Development Status :: 4 - Beta",
 ]
+
+[project.urls]
+Homepage = "https://github.com/lesleslie/jinja2-inflection"
+Issues = "https://github.com/lesleslie/jinja2-inflection/issues"
 
 [project.license]
 text = "BSD-3-Clause"
@@ -162,5 +215,5 @@ build-backend = "pdm.backend"
 
 [dependency-groups]
 dev = [
-    "crackerjack>=0.14.0",
+    "crackerjack>=0.18.4",
 ]
