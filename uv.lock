@@ -813,7 +813,7 @@ wheels = [
 
 [[package]]
 name = "jinja2-inflection"
-version = "0.5.0"
+version = "0.5.1"
 source = { editable = "." }
 dependencies = [
     { name = "inflection" },

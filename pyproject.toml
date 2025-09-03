@@ -6,7 +6,7 @@ requires = [
 
 [project]
 name = "jinja2-inflection"
-version = "0.5.0"
+version = "0.5.1"
 description = "A Jinja2 extension that integrates the inflection library's string transformation functions as template filters"
 dependencies = [
     "inflection>=0.5.1",
