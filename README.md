@@ -82,27 +82,23 @@ env = Environment(extensions=[InflectionExtension])
 # Use filters in templates
 examples = [
     # Basic string transformations
-    "{{ 'snake_case_string' | camelize }}",                      # Outputs: "SnakeCaseString"
-    "{{ 'first_name' | dasherize }}",                            # Outputs: "first-name"
-    "{{ 'employee_salary' | humanize }}",                        # Outputs: "Employee salary"
-    "{{ 'DeviceType' | underscore }}",                           # Outputs: "device_type"
-
+    "{{ 'snake_case_string' | camelize }}",  # Outputs: "SnakeCaseString"
+    "{{ 'first_name' | dasherize }}",  # Outputs: "first-name"
+    "{{ 'employee_salary' | humanize }}",  # Outputs: "Employee salary"
+    "{{ 'DeviceType' | underscore }}",  # Outputs: "device_type"
     # Number transformations
-    "{{ 1 | ordinal }}",                                         # Outputs: "st"
-    "{{ 2 | ordinalize }}",                                      # Outputs: "2nd"
-
+    "{{ 1 | ordinal }}",  # Outputs: "st"
+    "{{ 2 | ordinalize }}",  # Outputs: "2nd"
     # Pluralization and singularization
-    "{{ 'octopus' | pluralize }}",                               # Outputs: "octopi"
-    "{{ 'mice' | singularize }}",                                # Outputs: "mouse"
-
+    "{{ 'octopus' | pluralize }}",  # Outputs: "octopi"
+    "{{ 'mice' | singularize }}",  # Outputs: "mouse"
     # Other transformations
-    "{{ 'UserAccount' | tableize }}",                            # Outputs: "user_accounts"
-    "{{ 'api_responses' | titleize }}",                          # Outputs: "Api Responses"
-    "{{ 'café' | transliterate }}",                              # Outputs: "cafe"
-
+    "{{ 'UserAccount' | tableize }}",  # Outputs: "user_accounts"
+    "{{ 'api_responses' | titleize }}",  # Outputs: "Api Responses"
+    "{{ 'café' | transliterate }}",  # Outputs: "cafe"
     # Using parameters
-    "{{ 'product_category' | camelize(uppercase_first_letter=False) }}", # Outputs: "productCategory"
-    "{{ 'Donald E. Knuth' | parameterize(separator='_') }}",     # Outputs: "donald_e_knuth"
+    "{{ 'product_category' | camelize(uppercase_first_letter=False) }}",  # Outputs: "productCategory"
+    "{{ 'Donald E. Knuth' | parameterize(separator='_') }}",  # Outputs: "donald_e_knuth"
 ]
 
 # Render and print each example
@@ -124,15 +120,16 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 templates.env.add_extension(InflectionExtension)
 
+
 @app.get("/")
 async def index(request: Request):
     return templates.TemplateResponse(
-        "index.html",
-        {"request": request, "snake_case_var": "user_profile"}
+        "index.html", {"request": request, "snake_case_var": "user_profile"}
     )
 ```
 
 In your template (`templates/index.html`):
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -159,15 +156,14 @@ from jinja2_inflection import InflectionExtension
 templates = Jinja2Templates(directory="templates")
 templates.env.add_extension(InflectionExtension)
 
+
 async def homepage(request: Request):
     return templates.TemplateResponse(
-        "index.html",
-        {"request": request, "table_name": "user_accounts"}
+        "index.html", {"request": request, "table_name": "user_accounts"}
     )
 
-routes = [
-    Route("/", homepage)
-]
+
+routes = [Route("/", homepage)]
 
 app = Starlette(debug=True, routes=routes)
 ```
@@ -181,9 +177,12 @@ from jinja2_inflection import InflectionExtension
 app = Flask(__name__)
 app.jinja_env.add_extension(InflectionExtension)
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return render_template('index.html')  # Now your templates can use inflection filters
+    return render_template(
+        "index.html"
+    )  # Now your templates can use inflection filters
 ```
 
 ### Using with Django
@@ -210,6 +209,7 @@ Then in `myapp/jinja2.py`:
 from jinja2 import Environment
 from jinja2_inflection import InflectionExtension
 
+
 def environment(**options):
     env = Environment(**options)
     env.add_extension(InflectionExtension)
@@ -231,14 +231,14 @@ BSD-3-Clause
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Create your feature branch (`git checkout -b feature/amazing-feature`)
+1. Commit your changes (`git commit -m 'Add some amazing feature'`)
+1. Push to the branch (`git push origin feature/amazing-feature`)
+1. Open a Pull Request
 
 ## Acknowledgments
 
 - This project uses the [inflection](https://github.com/jpvanhal/inflection) library to provide powerful string
-transformation capabilities. Special thanks to the contributors of the inflection library for their work.
+  transformation capabilities. Special thanks to the contributors of the inflection library for their work.
 - Additionally, we acknowledge the [Jinja2](https://palletsprojects.com/p/jinja/)
-project for providing a robust templating engine that makes this extension possible.
+  project for providing a robust templating engine that makes this extension possible.

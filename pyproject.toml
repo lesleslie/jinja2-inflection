@@ -1,3 +1,46 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+    "hatchling",
+]
+
+[project]
+name = "jinja2-inflection"
+version = "0.5.0"
+description = "A Jinja2 extension that integrates the inflection library's string transformation functions as template filters"
+dependencies = [
+    "inflection>=0.5.1",
+    "jinja2>=3.1.6",
+]
+requires-python = ">=3.13"
+readme = "README.md"
+authors = [
+    { name = "lesleslie", email = "les@wedgwoodwebworks.com" },
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Text Processing :: Filters",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+    "License :: OSI Approved :: BSD License",
+    "Development Status :: 4 - Beta",
+]
+
+[project.urls]
+Homepage = "https://github.com/lesleslie/jinja2-inflection"
+Issues = "https://github.com/lesleslie/jinja2-inflection/issues"
+
+[project.license]
+text = "BSD-3-Clause"
+
+[dependency-groups]
+dev = [
+    "crackerjack>=0.18.4",
+]
+
 [tool.ruff]
 line-length = 88
 target-version = "py313"
@@ -55,14 +98,12 @@ exclude-deps = [
     "pre-commit",
     "tomli-w",
     "uv",
-    "pdm",
     "pyfiglet",
     "google-crc32c",
     "pytest",
     "autotyping",
     "pytest-mock",
     "pytest-timeout",
-    "pdm-bump",
 ]
 
 [tool.refurb]
@@ -175,45 +216,6 @@ exclude_also = [
 ]
 ignore_errors = false
 
-[project]
-name = "jinja2-inflection"
-version = "0.4.0"
-description = "A Jinja2 extension that integrates the inflection library's string transformation functions as template filters"
-dependencies = [
-    "inflection>=0.5.1",
-    "jinja2>=3.1.6",
-]
-requires-python = ">=3.13"
-readme = "README.md"
-authors = [
-    { name = "lesleslie", email = "les@wedgwoodwebworks.com" },
-]
-classifiers = [
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3.13",
-    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-    "Topic :: Text Processing :: Filters",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Operating System :: OS Independent",
-    "Typing :: Typed",
-    "License :: OSI Approved :: BSD License",
-    "Development Status :: 4 - Beta",
-]
-
-[project.urls]
-Homepage = "https://github.com/lesleslie/jinja2-inflection"
-Issues = "https://github.com/lesleslie/jinja2-inflection/issues"
-
-[project.license]
-text = "BSD-3-Clause"
-
-[build-system]
-requires = [
-    "pdm-backend",
-]
-build-backend = "pdm.backend"
-
-[dependency-groups]
-dev = [
-    "crackerjack>=0.18.4",
-]
+[tool.uv]
+keyring-provider = "subprocess"
+index-url = "https://pypi.org/simple/"

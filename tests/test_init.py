@@ -1,3 +1,4 @@
+import pytest
 from jinja2 import Environment
 from jinja2.ext import Extension
 from jinja2_inflection import InflectionExtension
@@ -92,3 +93,79 @@ class TestInflectionExtension:
         for template_str, expected in test_cases:
             template = env.from_string(template_str)
             assert template.render() == expected
+
+    def test_parameterized_filters_edge_cases(self) -> None:
+        env = Environment(extensions=[InflectionExtension], autoescape=True)
+
+        # Test camelize with different parameter values
+        template = env.from_string(
+            "{{ 'test_string' | camelize(uppercase_first_letter=True) }}"
+        )
+        assert template.render() == "TestString"
+
+        template = env.from_string(
+            "{{ 'test_string' | camelize(uppercase_first_letter=False) }}"
+        )
+        assert template.render() == "testString"
+
+        # Test parameterize with different separators
+        template = env.from_string("{{ 'Test String' | parameterize(separator='_') }}")
+        assert template.render() == "test_string"
+
+        template = env.from_string("{{ 'Test String' | parameterize(separator='') }}")
+        assert template.render() == "teststring"
+
+        # Test parameterize with default separator
+        template = env.from_string("{{ 'Test String' | parameterize }}")
+        assert template.render() == "test-string"
+
+    def test_edge_cases_and_error_conditions(self) -> None:
+        env = Environment(extensions=[InflectionExtension], autoescape=True)
+
+        # Test with empty strings
+        template = env.from_string("{{ '' | camelize }}")
+        assert template.render() == ""
+
+        template = env.from_string("{{ '' | dasherize }}")
+        assert template.render() == ""
+
+        # Test ordinal with different numbers
+        test_cases = [
+            ("{{ 1 | ordinal }}", "st"),
+            ("{{ 2 | ordinal }}", "nd"),
+            ("{{ 3 | ordinal }}", "rd"),
+            ("{{ 4 | ordinal }}", "th"),
+            ("{{ 11 | ordinal }}", "th"),
+            ("{{ 21 | ordinal }}", "st"),
+        ]
+
+        for template_str, expected in test_cases:
+            template = env.from_string(template_str)
+            assert template.render() == expected
+
+        # Test ordinalize with different numbers
+        test_cases = [
+            ("{{ 1 | ordinalize }}", "1st"),
+            ("{{ 2 | ordinalize }}", "2nd"),
+            ("{{ 3 | ordinalize }}", "3rd"),
+            ("{{ 4 | ordinalize }}", "4th"),
+            ("{{ 11 | ordinalize }}", "11th"),
+            ("{{ 21 | ordinalize }}", "21st"),
+        ]
+
+        for template_str, expected in test_cases:
+            template = env.from_string(template_str)
+            assert template.render() == expected
+
+    def test_error_conditions(self) -> None:
+        env = Environment(extensions=[InflectionExtension], autoescape=True)
+
+        # Test with None values (should raise TypeError)
+        template = env.from_string("{{ None | camelize }}")
+        with pytest.raises(TypeError):
+            template.render()
+
+        # Test with numeric inputs where strings are expected (should raise TypeError)
+        template = env.from_string("{{ 123 | camelize }}")
+        with pytest.raises(TypeError):
+            template.render()
