@@ -1,0 +1,20 @@
+[run]
+source = jinja2_inflection
+omit =
+    */tests/*
+    */site-packages/*
+    */__pycache__/*
+    */venv/*
+    */.venv/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    pass
+    raise ImportError
+    except ImportError
+    def __str__
+    @abstractmethod

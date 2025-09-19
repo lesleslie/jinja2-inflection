@@ -11,6 +11,34 @@
 /tmp/
 /__pycache__/
 /*.pyc
-/.jinja2_inflection.yaml
 
+
+# Crackerjack patterns
+# Crackerjack generated files
+*$py.class
+*.crackerjack.bak
+*.py[cod]
+.coverage.*
+.crackerjack/
+.mypy_cache/
+.pytest_cache/
 .qodo
+.ruff_cache/
+.tox/
+/*.pyc
+/.idea
+/.jinja2_inflection.yaml
+/.mypy_cache/
+/.pdm-build/
+/.pdm-python
+/.pdm.toml
+/.ruff_cache/
+/__pycache__/
+/__pypackages__/
+/build/
+/dist/
+/tmp/
+__pycache__/
+crackerjack-debug-*.log
+/htmlcov/
+/.benchmarks/
