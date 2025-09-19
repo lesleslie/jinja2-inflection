@@ -48,6 +48,11 @@ fix = true
 show-fixes = true
 output-format = "full"
 unsafe-fixes = true
+exclude = [
+    "tests/",
+    "test_*.py",
+    "*_test.py",
+]
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -86,6 +91,14 @@ target-version = [
     "py312",
 ]
 
+[tool.complexipy]
+default_pattern = "**/*.py"
+exclude_patterns = [
+    "**/tests/**",
+    "**/test_*.py",
+]
+max_complexity = 15
+
 [tool.creosote]
 paths = [
     "jinja2_inflection",
@@ -108,6 +121,16 @@ exclude-deps = [
 
 [tool.refurb]
 enable_all = true
+python_version = "3.13"
+ignore = [
+    "FURB184",
+    "FURB120",
+]
+exclude = [
+    "tests/",
+    "test_*.py",
+    "*_test.py",
+]
 
 [tool.bandit]
 target = [
@@ -152,7 +175,7 @@ pythonVersion = "3.13"
 pythonPlatform = "Darwin"
 
 [tool.codespell]
-skip = "*/data/*"
+skip = "*/data/*,tests/*,test_*.py,*_test.py"
 quiet-level = 3
 ignore-words-list = "crate,uptodate,nd"
 
@@ -179,6 +202,11 @@ python_functions = [
 min_confidence = 86
 paths = [
     "jinja2_inflection",
+]
+exclude = [
+    "tests/",
+    "test_*.py",
+    "*_test.py",
 ]
 ignore_names = [
     "cls",
