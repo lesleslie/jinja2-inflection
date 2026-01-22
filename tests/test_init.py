@@ -79,7 +79,7 @@ class TestInflectionExtension:
             ("{{   'first_name'    |   dasherize }}", "first-name"),
             ("{{   'employee_salary'    |   humanize }}", "Employee salary"),
             ("{{ 1   |  ordinal }}", "st"),
-            ("{{ 2   |  ordinal }}", "nd"),
+            ("{{ 2   |  ordinal }}", "nd"),  # codespell:ignore
             ("{{ 1   |  ordinalize }}", "1st"),
             ("{{   'Donald E. Knuth'    |   parameterize }}", "donald-e-knuth"),
             ("{{   'octopus'    |   pluralize }}", "octopi"),
@@ -131,7 +131,7 @@ class TestInflectionExtension:
 
         test_cases = [
             ("{{ 1   |  ordinal }}", "st"),
-            ("{{ 2   |  ordinal }}", "nd"),
+            ("{{ 2   |  ordinal }}", "nd"),  # codespell:ignore
             ("{{ 3   |  ordinal }}", "rd"),
             ("{{ 4   |  ordinal }}", "th"),
             ("{{ 11   |  ordinal }}", "th"),

@@ -1,0 +1,13 @@
+{
+  "functions": [
+    {
+      "complexity": 0,
+      "file_name": "__init__.py",
+      "function_name": "InflectionExtension::__init__",
+      "path": "jinja2_inflection/__init__.py"
+    }
+  ],
+  "targets": [
+    "/Users/les/Projects/jinja2-inflection/jinja2_inflection"
+  ]
+}

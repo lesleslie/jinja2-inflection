@@ -42,187 +42,69 @@ dev = [
 ]
 
 [tool.ruff]
-line-length = 88
 target-version = "py313"
-fix = true
-show-fixes = true
-output-format = "full"
-unsafe-fixes = true
+line-length = 88
 exclude = [
     "tests/",
     "test_*.py",
     "*_test.py",
 ]
 
-[tool.ruff.format]
-docstring-code-format = true
-
 [tool.ruff.lint]
-ignore = [
-    "F821",
-    "D100",
-    "D101",
-    "D102",
-    "D103",
-    "D104",
-    "D105",
-    "D106",
-    "D107",
-]
 extend-select = [
-    "I",
     "C901",
-    "D",
+    "F",
+    "I",
+    "UP",
 ]
-
-[tool.ruff.lint.isort]
-no-lines-before = [
-    "first-party",
+ignore = [
+    "E402",
+    "F821",
+]
+fixable = [
+    "ALL",
 ]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 15
 
-[tool.ruff.lint.pydocstyle]
-convention = "google"
-
-[tool.black]
-target-version = [
-    "py312",
-]
-
-[tool.complexipy]
-default_pattern = "**/*.py"
-exclude_patterns = [
-    "**/tests/**",
-    "**/test_*.py",
-]
-max_complexity = 15
-
-[tool.creosote]
-paths = [
-    "jinja2_inflection",
-]
-deps-file = "pyproject.toml"
-exclude-deps = [
-    "pyyaml",
-    "pytest-cov",
-    "pytest-asyncio",
-    "pre-commit",
-    "tomli-w",
-    "uv",
-    "pyfiglet",
-    "google-crc32c",
-    "pytest",
-    "autotyping",
-    "pytest-mock",
-    "pytest-timeout",
-]
-
-[tool.refurb]
-enable_all = true
-python_version = "3.13"
-ignore = [
-    "FURB184",
-    "FURB120",
-]
-
-[tool.bandit]
-target = [
-    "jinja2_inflection",
-]
-skips = [
-    "B704",
-    "B113",
-    "B403",
-    "B404",
-    "B101",
-    "B602",
-    "B311",
-    "B603",
-    "B607",
-    "B301",
-]
-
-[tool.pyright]
-verboseOutput = true
-include = [
-    "jinja2_inflection",
-]
-exclude = [
-    "scratch",
-]
-extraPaths = [
-    ".venv/lib/python3.13/site-packages/",
-]
-typeCheckingMode = "strict"
-reportMissingTypeStubs = false
-reportOptionalMemberAccess = false
-reportOptionalCall = false
-reportUnknownMemberType = false
-reportUnknownVariableType = false
-reportUnknownArgumentType = false
-reportInvalidTypeForm = false
-reportUnknownLambdaType = false
-reportUnknownParameterType = "warning"
-reportPrivateUsage = false
-pythonVersion = "3.13"
-pythonPlatform = "Darwin"
-
-[tool.codespell]
-skip = "*/data/*,tests/*,test_*.py,*_test.py"
-quiet-level = 3
-ignore-words-list = "crate,uptodate,nd"
-
 [tool.pytest.ini_options]
-addopts = "--cov=jinja2_inflection --cov-report=term"
-asyncio_default_fixture_loop_scope = "function"
-python_files = [
-    "test_*.py",
-    "*_test.py",
-]
 asyncio_mode = "auto"
+timeout = 600
 testpaths = [
     "tests",
-    "jinja2_inflection",
 ]
-python_classes = [
-    "Test*",
+addopts = [
+    "--cov=jinja2-inflection",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-report=html:htmlcov",
+    "--cov-report=json",
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+    "--tb=short",
 ]
-python_functions = [
-    "test_*",
-]
-
-[tool.vulture]
-min_confidence = 86
-paths = [
-    "jinja2_inflection",
-]
-exclude = [
-    "tests/",
-    "test_*.py",
-    "*_test.py",
-]
-ignore_names = [
-    "cls",
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow tests (>2s)",
+    "benchmark: Benchmark tests (deferred)",
 ]
 
 [tool.coverage.run]
-branch = false
+branch = true
+parallel = true
+concurrency = [
+    "multiprocessing",
+]
 source = [
-    "jinja2_inflection",
+    "jinja2-inflection",
 ]
 data_file = ".coverage"
-parallel = false
 omit = [
     "*/tests/*",
-    "*/site-packages/*",
     "*/__pycache__/*",
     "*/__init__.py",
-    "*/_version.py",
-    "*/conftest.py",
-    "*/test_*.py",
-    "*/_test.py",
 ]
 
 [tool.coverage.report]
@@ -231,14 +113,37 @@ exclude_also = [
     "def __repr__",
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
-    "pass",
-    "raise ImportError",
-    "except ImportError",
-    "def __str__",
     "@abstractmethod",
 ]
-ignore_errors = false
 
-[tool.uv]
-keyring-provider = "subprocess"
-index-url = "https://pypi.org/simple/"
+[tool.bandit]
+target = [
+    "jinja2-inflection",
+]
+skips = [
+    "B101",
+    "B110",
+    "B112",
+    "B404",
+    "B603",
+    "B607",
+]
+exclude_dirs = [
+    "tests/",
+]
+
+[tool.creosote]
+paths = [
+    "jinja2-inflection",
+]
+deps-file = "pyproject.toml"
+exclude-deps = [
+    "hatchling",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-xdist",
+    "pytest-timeout",
+    "ruff",
+]

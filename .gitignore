@@ -14,18 +14,33 @@
 
 
 # Crackerjack patterns
-# Crackerjack generated files
+
+
+
+
+# Build/Distribution
+# Caches
+# Coverage
+# Crackerjack specific
+# Development
 *$py.class
 *.crackerjack.bak
+*.egg-info/
 *.py[cod]
+*.pyc
+.DS_STORE
+.coverage*
 .coverage.*
+.crackerjack-*
 .crackerjack/
 .mypy_cache/
 .pytest_cache/
 .qodo
 .ruff_cache/
 .tox/
+.venv/
 /*.pyc
+/.benchmarks/
 /.idea
 /.jinja2_inflection.yaml
 /.mypy_cache/
@@ -37,8 +52,9 @@
 /__pypackages__/
 /build/
 /dist/
+/htmlcov/
 /tmp/
 __pycache__/
+crackerjack-ai-debug-*.log
 crackerjack-debug-*.log
-/htmlcov/
-/.benchmarks/
+htmlcov/
